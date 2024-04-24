@@ -35,3 +35,7 @@
 
 * More dynamic typing where the time between keypresses determines the
   speed of the words being displayed
+
+# Notes
+
+* Karl did some tkinter experiments [here](https://github.com/TristanAMurray/Project0/tree/graphics-experiments).
