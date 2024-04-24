@@ -3,43 +3,31 @@ import time
 import os
 import glob
 
-path = '/so/path/to/file'
-for filename in glob.glob(os.path.join(path, '*.txt')):
-   with open(os.path.join(os.getcwd(), filename), 'r') as f: # open in readonly mode
-      # do your stuff
-
-
-
-"""
-test = open("depo.txt", "r").read().strip().split("~")
-textset
-for s in textset
-
-
-
-
-
-
-
-print(textset)
-
-
-
+set = open("depo.txt", "r").read().strip().split("#")
 tindex = 0
 
+
 def wrap(s, w):
-    return [s[i:i + w] for i in range(0, len(s), w)]
+   return [s[i:i + w] for i in range(0, len(s), w)]
 
 
-#splitting up the document into the right lines
-for text in textlistoflists in set
-for w in textlistoflists:
-    textlistoflists[tindex] = w.strip()
-    textlistoflists[tindex] = wrap(textlistoflists[tindex], 8)
-    tindex += 1
+# splitting up the document into the right lines
 
-print(textlistoflists)
+
+for paragraphs in set:
+   paragraphs = paragraphs.split("~")
+
 """
+
+for w in set:
+   set[tindex] = w.strip()
+   set[tindex] = wrap(set[tindex], 91)
+   tindex += 1
+
+"""
+print(paragraphs)
+
+
 
 
 
