@@ -76,11 +76,13 @@ def mainloop():
                     if event1.event_type == keyboard.KEY_DOWN:
                         keypressed()
                 canvas.after(delay, lambda c=canvas_text, s=line[0:l]: canvas.itemconfigure(c, text=s))
-                playclick()
+                #playclick()
                 delay += random.randint(20, 60)
                 battery -= 1
             y += 16
+        #end of paragraph
         y += 32
+
 
 
 t1 = threading.Thread(target=mainloop).start()
