@@ -1,8 +1,8 @@
-It is interesting to see how this architectural resource sound which runs counter to any utilitarian model of the city.
+Section 1 paragraph 1
 
 ~
 
-This is paragaph 2
+Section 1 paragraph 2
 
 #
 
@@ -10,4 +10,6 @@ Section 2 paragraph 1
 
 ~
 
-Section 2 paragraph 1
+
+
+Section 2 paragraph 2
