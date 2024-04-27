@@ -97,8 +97,10 @@ lastPress = float(0)
 timeBetween = float(0)
 battery = 0
 goodFont = TkFont.Font(family="Courier", size=12, weight="bold")
-x = 10
-y = 10
+orig_x = 10
+x = orig_x
+orig_y = 10
+y = orig_y
 letter = 0
 write = True
 ###################
@@ -109,6 +111,8 @@ def playclick():
     playsound.playsound(soundfile)
 
 def keypressed(ignored_event):
+    global orig_x
+    global orig_y
     global x
     global y
     global delay
@@ -129,26 +133,32 @@ def keypressed(ignored_event):
     #     sys.stdout.write("\n-----------------\n\n")
     #     sys.stdout.flush()
 
+    # TODO: You could put the code below in a loop that iterates a
+    # random number (N) of times, and thus fetches N text fragments in
+    # turn and displays each one, putting paragraph breaks and section
+    # breaks as necessary.
+
     this_fragment = depo_text.next_fragment()
     playclick()
 
     if this_fragment[2]:
-        y += 32  # end of section
+        y += 32  # start a new section
+        x = orig_x
     elif this_fragment[1]:
-        y += 16  # end of paragraph
+        y += 16  # start a new paragraph
+        x = orig_x
     
-    # TODO: We need to increment "x" by the appropriate length for the
-    # text we write here (this_fragment[0]).  How to do that?  Not
-    # sure yet.
     canvas_text = canvas.create_text(x, y,
                                      text=this_fragment[0],
                                      anchor="nw", 
                                      fill="white", 
                                      font=goodFont)
+    text_bbox = canvas.bbox(canvas_text)
+    x += (text_bbox[2] - text_bbox[0])
 
-    # I didn't really understand all the delay and battery stuff, so I
-    # didn't include it, but I left these lines here from before in
-    # case you need to refer to them:
+    # I didn't know how you want all the delay and battery stuff to
+    # work, so I didn't use it, but I left these lines here from
+    # before in case you need to refer to them:
     # 
     # canvas.after(delay, lambda c=canvas_text, s=line[0:l]: canvas.itemconfigure(c, text=s))
     # delay += random.randint(20, 60)
