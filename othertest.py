@@ -82,6 +82,7 @@ class TextSource:
                 self.section_break = False
         else:
             self.para_break = False
+            self.section_break = False
         return ret
 
 depo_text = TextSource(textprocess(open("depo.txt", "r").read().strip()))
