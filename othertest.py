@@ -4,7 +4,6 @@ import random
 import os
 import sys
 import time
-import keyboard
 import playsound
 
 def wrap(s, w):
@@ -67,6 +66,7 @@ class TextSource:
         ret = [self.text[self.cur_section][self.cur_para][self.cur_fragment],
                self.para_break, self.section_break,]
         self.cur_fragment += 1
+        print("advanced the fragment")
         # Test if we're at any boundaries and need to cycle around.
         if self.cur_fragment == len(self.text[self.cur_section][self.cur_para]):
             self.cur_fragment = 0
@@ -110,7 +110,7 @@ def playclick():
     soundfile = f"click{random.choice(soundfilenumbers)}.wav"
     playsound.playsound(soundfile)
 
-def keypressed(ignored_event):
+def keypressed(event):
     global orig_x
     global orig_y
     global x
@@ -121,6 +121,7 @@ def keypressed(ignored_event):
     global lastPress
     global timeBetween
     global depo_text
+    global write
 
     # Uncomment these to get console debugging prints:
     # 
@@ -137,25 +138,34 @@ def keypressed(ignored_event):
     # random number (N) of times, and thus fetches N text fragments in
     # turn and displays each one, putting paragraph breaks and section
     # breaks as necessary.
+    if write:
+        this_fragment = depo_text.next_fragment()
+        playclick()
+        if this_fragment[2]:
+            write = False
+            y += 48  # start a new section
+            x = orig_x
+            enter_text = canvas.create_text(x, y, text="Press ENTER to Continue>", anchor="nw", fill="white", font=goodFont)
+            y += 48  # start a new section
+            x = orig_x
+        elif this_fragment[1]:
+            y += 16  # start a new paragraph
+            x = orig_x
 
-    this_fragment = depo_text.next_fragment()
-    playclick()
+        canvas_text = canvas.create_text(x, y,
+                                         text=this_fragment[0],
+                                         anchor="nw",
+                                         fill="white",
+                                         font=goodFont)
+        text_bbox = canvas.bbox(canvas_text)
+        x += (text_bbox[2] - text_bbox[0])
 
-    if this_fragment[2]:
-        y += 32  # start a new section
+    if write is False and event.keysym == 'Return':
+        canvas.delete("all")
+        print("deleted everything")
         x = orig_x
-    elif this_fragment[1]:
-        y += 16  # start a new paragraph
-        x = orig_x
-    
-    canvas_text = canvas.create_text(x, y,
-                                     text=this_fragment[0],
-                                     anchor="nw", 
-                                     fill="white", 
-                                     font=goodFont)
-    text_bbox = canvas.bbox(canvas_text)
-    x += (text_bbox[2] - text_bbox[0])
-
+        y = orig_y
+        write = True
     # I didn't know how you want all the delay and battery stuff to
     # work, so I didn't use it, but I left these lines here from
     # before in case you need to refer to them:
