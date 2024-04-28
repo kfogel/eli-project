@@ -23,9 +23,11 @@ def textprocess(f):
     for idxp, p in enumerate(s):
         s[idxp] = p.strip().split("~")
         for idxl, l in enumerate(s[idxp]):
-            s[idxp][idxl] = wrap(l.strip(), 3)
-            for idxstring, string in enumerate(s[idxp][idxl]):
-                s[idxp][idxl][idxstring] = string.strip("\n")
+            s[idxp][idxl] = wrap(l.strip(), 91)
+            for idxf, f in enumerate(s[idxp][idxl]):
+                s[idxp][idxl][idxf] = wrap(f.strip(), 2)
+                for idxi, i in enumerate(s[idxp][idxl][idxf]):
+                    s[idxp][idxl][idxf][idxi] = i.strip("\n")
     return s
 
 # sys.stderr.write(f"DEBUG: whole depo: {textprocess(depo)}\n")
@@ -36,10 +38,12 @@ class TextSource:
         "See the textprocess() documentation for the format of TEXT."
         self.text = text
         self.cur_section = 0  # current section we're in
-        self.cur_para = 0     # current paragraph within current section
+        self.cur_para = 0   # current paragraph within current section
+        self.cur_line = 0
         self.cur_fragment = 0 # current word fragment within current para 
         # Was the previous fragment the last one before a paragraph
         # and/or section break?
+        self.line_break = False
         self.para_break = False
         self.section_break = False
     def next_fragment(self):
@@ -63,28 +67,38 @@ class TextSource:
         break to print anyway -- that's about how the consumer wants
         to display things).
         """
-        ret = [self.text[self.cur_section][self.cur_para][self.cur_fragment],
-               self.para_break, self.section_break,]
+        ret = [self.text[self.cur_section][self.cur_para][self.cur_line][self.cur_fragment],
+               self.line_break,
+               self.para_break,
+               self.section_break,]
         self.cur_fragment += 1
         # Test if we're at any boundaries and need to cycle around.
-        if self.cur_fragment == len(self.text[self.cur_section][self.cur_para]):
+        if self.cur_fragment == len(self.text[self.cur_section][self.cur_para][self.cur_line]):
             self.cur_fragment = 0
-            self.cur_para += 1
-            self.para_break = True
-            if self.cur_para == len(self.text[self.cur_section]):
-                self.cur_para = 0
-                self.cur_section += 1
-                self.section_break = True
-                if self.cur_section == len(self.text):
-                    self.cur_section = 0
+            self.cur_line += 1
+            self.line_break = True
+            if self.cur_line == len(self.text[self.cur_section][self.cur_para]):
+                self.cur_line = 0
+                self.cur_para += 1
+                self.para_break = True
+                if self.cur_para == len(self.text[self.cur_section]):
+                    self.cur_para = 0
+                    self.cur_section += 1
+                    self.section_break = True
+                    if self.cur_section == len(self.text):
+                        self.cur_section = 0
+                else:
+                    self.section_break = False
             else:
+                self.para_break = False
                 self.section_break = False
         else:
+            self.line_break = False
             self.para_break = False
             self.section_break = False
-        print(f"Current section: {self.cur_section}")
-        print(f"CurrentPara: {self.cur_para}")
-        print(f"CurrentFragment: {self.cur_fragment}")
+        #print(f"Current section: {self.cur_section}")
+        #print(f"CurrentPara: {self.cur_para}")
+        #print(f"CurrentFragment: {self.cur_fragment}")
         return ret
 
 depo_text = TextSource(textprocess(open("depo.txt", "r").read().strip()))
@@ -152,18 +166,25 @@ def keypressed(event):
         x = orig_x
         y = orig_y
 
-
+# 0 is string
+# 1 is line
+# 2 is paragraph
+# 3 is section
     if write:
-        if this_fragment[2]:
+        if this_fragment[3]:
             print("new section")
             y += 48  # start a new section
             x = orig_x
             enter_text = canvas.create_text(x, y, text="Press ENTER To Continue>", anchor="nw", fill="white", font=goodFont)
             write = False
             carryFragment = this_fragment[0]
-        elif this_fragment[1]:
+        elif this_fragment[2]:
             print("new paragraph")
             y += 32  # start a new paragraph
+            x = orig_x
+        elif this_fragment[1]:
+            print("new line")
+            y += 16  # start a new paragraph
             x = orig_x
 
     if write:
