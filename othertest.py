@@ -66,7 +66,6 @@ class TextSource:
         ret = [self.text[self.cur_section][self.cur_para][self.cur_fragment],
                self.para_break, self.section_break,]
         self.cur_fragment += 1
-        print("advanced the fragment")
         # Test if we're at any boundaries and need to cycle around.
         if self.cur_fragment == len(self.text[self.cur_section][self.cur_para]):
             self.cur_fragment = 0
@@ -83,6 +82,9 @@ class TextSource:
         else:
             self.para_break = False
             self.section_break = False
+        print(f"Current section: {self.cur_section}")
+        print(f"CurrentPara: {self.cur_para}")
+        print(f"CurrentFragment: {self.cur_fragment}")
         return ret
 
 depo_text = TextSource(textprocess(open("depo.txt", "r").read().strip()))
@@ -103,6 +105,7 @@ orig_y = 10
 y = orig_y
 letter = 0
 write = True
+carryFragment = str("")
 ###################
 
 def playclick():
@@ -122,6 +125,7 @@ def keypressed(event):
     global timeBetween
     global depo_text
     global write
+    global carryFragment
 
     # Uncomment these to get console debugging prints:
     # 
@@ -135,38 +139,52 @@ def keypressed(event):
     #     sys.stdout.flush()
 
     # TODO: You could put the code below in a loop that iterates a
-    # random number (N) of times, and thus fetches N text fragments in
+    # random numbetr (N) of times, and thus fetches N text fragments in
     # turn and displays each one, putting paragraph breaks and section
-    # breaks as necessary.
+    # breathteaks as necessary.
+    this_fragment = depo_text.next_fragment()
+
+    if write is False and event.keysym == "Return":
+        write = True
+        this_fragment[0] = carryFragment
+        depo_text.cur_fragment = 1
+        canvas.delete("all")
+        x = orig_x
+        y = orig_y
+
+
     if write:
-        this_fragment = depo_text.next_fragment()
-        playclick()
         if this_fragment[2]:
+            print("new section")
+            y += 48  # start a new section
+            x = orig_x
+            enter_text = canvas.create_text(x, y, text="Press ENTER To Continue>", anchor="nw", fill="white", font=goodFont)
             write = False
-            y += 48  # start a new section
-            x = orig_x
-            enter_text = canvas.create_text(x, y, text="Press ENTER to Continue>", anchor="nw", fill="white", font=goodFont)
-            y += 48  # start a new section
-            x = orig_x
+            carryFragment = this_fragment[0]
         elif this_fragment[1]:
-            y += 16  # start a new paragraph
+            print("new paragraph")
+            y += 32  # start a new paragraph
             x = orig_x
 
+    if write:
         canvas_text = canvas.create_text(x, y,
                                          text=this_fragment[0],
                                          anchor="nw",
                                          fill="white",
                                          font=goodFont)
+        playclick()
         text_bbox = canvas.bbox(canvas_text)
         x += (text_bbox[2] - text_bbox[0])
 
-    if write is False and event.keysym == 'Return':
-        canvas.delete("all")
-        print("deleted everything")
-        x = orig_x
-        y = orig_y
-        write = True
-    # I didn't know how you want all the delay and battery stuff to
+    #elif event.keysym == "Return":
+    #    canvas.delete("all")
+    #    x = orig_x
+    #    y = orig_y
+    #    write = True
+
+
+
+# I didn't know how you want all the delay and battery stuff to
     # work, so I didn't use it, but I left these lines here from
     # before in case you need to refer to them:
     # 
