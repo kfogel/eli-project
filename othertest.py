@@ -23,9 +23,9 @@ def textprocess(f):
     for idxp, p in enumerate(s):
         s[idxp] = p.strip().split("~")
         for idxl, l in enumerate(s[idxp]):
-            s[idxp][idxl] = wrap(l.strip(), 4)
+            s[idxp][idxl] = wrap(l.strip(), 3)
             for idxstring, string in enumerate(s[idxp][idxl]):
-                s[idxp][idxl][idxstring] = string.strip()
+                s[idxp][idxl][idxstring] = string.strip("\n")
     return s
 
 # sys.stderr.write(f"DEBUG: whole depo: {textprocess(depo)}\n")
@@ -91,7 +91,7 @@ depo_text = TextSource(textprocess(open("depo.txt", "r").read().strip()))
 
 root = tk.Tk()
 root.configure(bg="black")
-# root.attributes('-fullscreen', True)  # make main window full-screen
+root.attributes('-fullscreen', True)  # make main window full-screen
 canvas = tk.Canvas(root, width=400, height=400, bg="black")
 canvas.pack(fill=tk.BOTH, expand=True)
 delay = 0

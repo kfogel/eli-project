@@ -1,10 +1,13 @@
-Section 1 paragraph 1
+As I mentioned in the brief moment after class, my initial thought going into this semester is to try and engage a broader range of my other interests and specifically technical and engineering knowledge outside of architecture. I have been involved with learning about sound physics and audio engineering for awhile, but have never seen an approachable opportunity to engage with the world of sound in a studio class. Sure, I have thought about the various acoustic properties of the structures I have created over the past few years, making tweaks based on acoustic sight lines and other sonic aspects of the structure, but never really in the way that I imagine liking.
+I’m imagining the possibility of having a project that has a sizable focus on not just using space to treat sound in certain ways, an aspect that all sonically engaged architecture has, but to work with the speaker drivers themselves, and possibly exploring the structure as a speaker itself. There are orientations of internal walls, depending on density and material, that mimic the sonic goals of many speaker cabinet designs, to accentuate certain frequencies, and limit others, and to create a cabinet that has something called an even response, where the reproducer (the speaker) represents the recording to sound exactly as those who created it heard it. However, this is where the aspect of art-ictulation comes in, we don’t have recreate the sounds exactly as they were produced, and can also have various points in the space offer different sonic profiles to the listener.
+
 
 ~
 
 Section 1 paragraph 2
 
 #
+
 
 Section 2 paragraph 1
 
