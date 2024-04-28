@@ -5,6 +5,7 @@ import os
 import sys
 import time
 import playsound
+import threading
 
 def wrap(s, w):
    return [s[i:i + w] for i in range(0, len(s), w)]
@@ -125,7 +126,20 @@ carryFragment = str("")
 def playclick():
     soundfilenumbers = [1, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,]
     soundfile = f"click{random.choice(soundfilenumbers)}.wav"
-    playsound.playsound(soundfile)
+    # We used to just call playsound.playsound() directly, like this:
+    # 
+    # playsound.playsound(soundfile)
+    # 
+    # But that meant it was called synchronously: the whole program
+    # had to wait until the sounds finishes playing.  This meant that
+    # the user experienced delay, as the program couldn't keep up with
+    # their typing.  So instead we play the sound in its own separate
+    # thread.  Now the playing happens in the background -- in other
+    # words, this playclick() function actually exits before the sound
+    # has played, and control returns to the caller, so we can go back
+    # to the regular event loop and handle the next keypress while
+    # this sound is in the process of playing in a separate thread.
+    threading.Thread(target=playsound.playsound, args=(soundfile,), daemon=True).start()
 
 def keypressed(event):
     global orig_x
