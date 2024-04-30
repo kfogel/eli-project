@@ -1,11 +1,15 @@
 import tkinter as tk
 import tkinter.font as TkFont
+from tkinter import ttk
 import random
 import os
 import sys
 import time
 import playsound
 import threading
+import PIL
+from PIL import Image, ImageTk
+
 
 def wrap(s, w):
    return [s[i:i + w] for i in range(0, len(s), w)]
@@ -24,9 +28,9 @@ def textprocess(f):
     for idxp, p in enumerate(s):
         s[idxp] = p.strip().split("~")
         for idxl, l in enumerate(s[idxp]):
-            s[idxp][idxl] = wrap(l.strip(), 91)
+            s[idxp][idxl] = wrap(l.strip(), 59)
             for idxf, f in enumerate(s[idxp][idxl]):
-                s[idxp][idxl][idxf] = wrap(f.strip(), 2)
+                s[idxp][idxl][idxf] = wrap(f.strip(), random.randint(2, 4))
                 for idxi, i in enumerate(s[idxp][idxl][idxf]):
                     s[idxp][idxl][idxf][idxi] = i.strip("\n")
     return s
@@ -88,6 +92,7 @@ class TextSource:
                     self.section_break = True
                     if self.cur_section == len(self.text):
                         self.cur_section = 0
+                        print("sequence done")
                 else:
                     self.section_break = False
             else:
@@ -102,8 +107,7 @@ class TextSource:
         #print(f"CurrentFragment: {self.cur_fragment}")
         return ret
 
-depo_text = TextSource(textprocess(open("depo.txt", "r").read().strip()))
-
+depo_text = TextSource(textprocess(open("depo.txt", "r", encoding="utf8").read().strip()))
 root = tk.Tk()
 root.configure(bg="black")
 root.attributes('-fullscreen', True)  # make main window full-screen
@@ -113,18 +117,24 @@ delay = 0
 lastPress = float(0)
 timeBetween = float(0)
 battery = 0
-goodFont = TkFont.Font(family="Courier", size=12, weight="bold")
-orig_x = 10
+goodFont = TkFont.Font(family="Courier", size=16) #weight="bold"
+orig_x = 12
 x = orig_x
-orig_y = 10
+orig_y = 12
 y = orig_y
 letter = 0
 write = True
 carryFragment = str("")
+pictureTime = True
 ###################
 
+
+def playenter():
+    playsound.playsound("entersound.wav")
+def playpicture():
+    threading.Thread(target=playsound.playsound, args=("picturesound.wav",), daemon=True).start()
 def playclick():
-    soundfilenumbers = [1, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,]
+    soundfilenumbers = [1, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37, 38,]
     soundfile = f"click{random.choice(soundfilenumbers)}.wav"
     # We used to just call playsound.playsound() directly, like this:
     # 
@@ -154,6 +164,7 @@ def keypressed(event):
     global depo_text
     global write
     global carryFragment
+    global pictureTime
 
     # Uncomment these to get console debugging prints:
     # 
@@ -173,32 +184,28 @@ def keypressed(event):
     this_fragment = depo_text.next_fragment()
 
     if write is False and event.keysym == "Return":
+        playenter()
         write = True
         this_fragment[0] = carryFragment
+        depo_text.cur_para = 0
+        depo_text.cur_line = 0
         depo_text.cur_fragment = 1
         canvas.delete("all")
         x = orig_x
         y = orig_y
 
-# 0 is string
-# 1 is line
-# 2 is paragraph
-# 3 is section
     if write:
         if this_fragment[3]:
-            print("new section")
-            y += 48  # start a new section
+            y += 70  # start a new section
             x = orig_x
             enter_text = canvas.create_text(x, y, text="Press ENTER To Continue>", anchor="nw", fill="white", font=goodFont)
             write = False
             carryFragment = this_fragment[0]
         elif this_fragment[2]:
-            print("new paragraph")
-            y += 32  # start a new paragraph
+            y += 46  # start a new paragraph
             x = orig_x
         elif this_fragment[1]:
-            print("new line")
-            y += 16  # start a new paragraph
+            y += 21  # start a new line
             x = orig_x
 
     if write:
@@ -210,6 +217,37 @@ def keypressed(event):
         playclick()
         text_bbox = canvas.bbox(canvas_text)
         x += (text_bbox[2] - text_bbox[0])
+    if pictureTime:
+        if "0" in this_fragment[0]:
+            canvas.p0 = ImageTk.PhotoImage(Image.open("intropic.png").resize((420, 750)))
+            canvas.create_image(850, 10, image=canvas.p0, anchor='nw')
+            playpicture()
+        elif "1" in this_fragment[0]:
+            canvas.p1 = ImageTk.PhotoImage(Image.open("cathedral.png").resize((420, 450)))
+            canvas.create_image(850, 10, image=canvas.p1, anchor='nw')
+            playpicture()
+        elif "2" in this_fragment[0]:
+            canvas.p2 = ImageTk.PhotoImage(Image.open("longyou.png").resize((420, 300)))
+            canvas.create_image(850, 490, image=canvas.p2, anchor='nw')
+            playpicture()
+        elif "3" in this_fragment[0]:
+            canvas.p3 = ImageTk.PhotoImage(Image.open("mosque.png").resize((420, 460)))
+            canvas.create_image(850, 10, image=canvas.p3, anchor='nw')
+            playpicture()
+        elif "4" in this_fragment[0]:
+            canvas.p4 = ImageTk.PhotoImage(Image.open("amphitheater.png").resize((420, 280)))
+            canvas.create_image(850, 480, image=canvas.p4, anchor='nw')
+            playpicture()
+        elif "5" in this_fragment[0]:
+            canvas.p5 = ImageTk.PhotoImage(Image.open("resonancepic.PNG").resize((800, 410)))
+            canvas.create_image(240, 375, image=canvas.p5, anchor='nw')
+            playpicture()
+        elif "9" in this_fragment[0]:
+            pictureTime = False
+
+
+
+
 
     #elif event.keysym == "Return":
     #    canvas.delete("all")
@@ -231,6 +269,7 @@ def keypressed(event):
     # timeBetween = round(time.time() - lastPress, 2)
     # lastPress = round(time.time(), 2)
     # battery += 4
-
 root.bind('<KeyPress>', keypressed)
 root.mainloop()
+
+

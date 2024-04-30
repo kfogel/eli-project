@@ -1,18 +1,85 @@
-As I mentioned in the brief moment after class, my initial thought going into this semester is to try and engage a broader range of my other interests and specifically technical and engineering knowledge outside of architecture. I have been involved with learning about sound physics and audio engineering for awhile, but have never seen an approachable opportunity to engage with the world of sound in a studio class. Sure, I have thought about the various acoustic properties of the structures I have created over the past few years, making tweaks based on acoustic sight lines and other sonic aspects of the structure, but never really in the way that I imagine liking.
-I’m imagining the possibility of having a project that has a sizable focus on not just using space to treat sound in certain ways, an aspect that all sonically engaged architecture has, but to work with the speaker drivers themselves, and possibly exploring the structure as a speaker itself. There are orientations of internal walls, depending on density and material, that mimic the sonic goals of many speaker cabinet designs, to accentuate certain frequencies, and limit others, and to create a cabinet that has something called an even response, where the reproducer (the speaker) represents the recording to sound exactly as those who created it heard it. However, this is where the aspect of art-ictulation comes in, we don’t have recreate the sounds exactly as they were produced, and can also have various points in the space offer different sonic profiles to the listener.
-
-
+_ _El…[ERR.OO:author’s name lost in data transport]……  -  Gilpin Wallenburg Studio “Terra - Transitions”
 ~
-
-Section 1 paragraph 2
+PLANNING FOR RESONANCE: Socio-Acoustics and Techo-Sonic Experimentation
+~
+TERRA: Mother of all mass-based vibration
+#
+“It is interesting to see how this architectural resource [sound] which runs counter to any utilitarian model of the city, shifts things in a new direction: the space becomes one of social experimentation. And the syncopated movement of human beings replaces any the predetermined order;” - Federica Bueti, from Nothing to see in the mirror of the perpetual movement of sound
+~
+SOUND and ACOUSTICS are immersive, multidimensional, subconscious, and messy. (0)
+~
+How does the interaction between technology and sound and immense impacts on our existence and society, especially in the urban fabric? 
+~
+This thesis seeks to observe sound on a technical level and experiment with the capabilities that modern tools and long-standing methods of acoustic manipulation allow to understand how sonic experimentation can be a radical method for social connection.
 
 #
 
-
-Section 2 paragraph 1
-
+HISTORICAL ACOUSTIC ARCHITECTURE REVIEW: 
 ~
+The _BIG_ and the {{[reverberant]}}
+~
+The Cathedral: (1)
+~.~.~.~.~.~.~.~
+LongYou caves, 浙江 (ZheJiang) Province (2)
 
+These spaces are for prayer, and expansive experience; large: one well known and long standing sonic architecture is that of the cathedral: characterized by being big and being made of stone with high reverberation times and amplification.
 
+#
 
-Section 2 paragraph 2
+The BIG, but the more …complicated…
+~
+The Music Room at Ali Qapu Palace, Iran (3)
+~.~.~.~.~.~.~.~.~.~
+The Amphitheater (4)
+
+#
+
+The advent of more advanced electrical sound technology with full range capabilities (<=Twenty hz - Twenty khz+) as well as more advanced processing in the Sixties and Seventies gave rise to a completely new way to experiment with sound: the ability to translate the manipulation of electricity to the manipulation of sound in very complex ways, and this is what this project is interested in.
+~
+Harnessing the physical and electrical augmentation of sound is the ability to quickly create entire sonic atmospheres emulating indoor or outdoor space, and tear them down in an instant.
+~
+Ever since the creation of the electric loudspeaker in relation to the telephone, it was about the reproduction of voice. And ever since, we are trying to get better and better at producing and curating the VOICE. The voice is very compelling to us; the desire for it to enter our brains and bodies unadulterated; to hear the origin perfectly, and hear it together at the same time. The voice can expand beyond the human voice, it can be a delicate instrumental performance, and even the output of an analog synthesizer.
+~
+Interested in the nuances of the fabled “perfect sound” and realities of audio reproduction, this thesis explores the depths of audio and acoustical engineering, and how out of experimentation arises an intimate relationship between sound and listener amidst the higher dimensional space that sound inhabits.
+
+#
+
+THE EXPERIMENT:
+~
+What has been created is a multi-part audio system that focuses on two primary things: the production of very low frequencies to explore resonance, and the disassembly and fermentation of the standard loudspeaker for experimentation while maintaining fidelity.
+~
+> > > ACTION: PLEASE VACATE YOUR CHAIR TO THE PERIMETER OF THE RESONANCE CHAMBER < < <
+~.~
+[Transmission paused() please put down the transmission board"]
+
+#
+
+What you just experienced is the product of interventions across the audio spectrum
+~
+This thesis is about the construction of this sound space, but also to propose one possible architectural intervention into the space in the spirit of experimentation.
+~
+As you have now experienced, the room can become a maze of undulating, transitory sonic barriers, and these can only be revealed to us one thin slice at a time. Proposed is one possible reaction to this phenomenon: a specifically selected area at either a high acoustic energy or low acoustic energy level. (5)
+
+#
+
+> > > POINTS OF INTEREST: < < <
+
+~.~
+- HISTORY OF CULTURE AND SOUND SYSTEMS: Jamaican Sound System Culture; UK Rave Culture; Detroit Techno
+~.~
+- SOUND AS ATMOSPHERE
+~.~
+- THE SONIC INTERVENTIONS
+~.~
+- HEALTH EFFECTS OF LOW FREQUENCY POLLUTION
+~.~
+- DESIGN OF THE AUDIO PRODUCTION IMPLEMENTS
+~.~
+- SOUND AS IMPERFECT
+~.~
+[....ERR.OI:Halt of transmission….. Proceed to next section for citations only]9
+
+#
+
+(EAW Corp. 2002; Farrehi, Nallamothu, and Navvab 2016; Gellersen et al. 2007; Haraway 1985; Hassan Azad, n.d.; Hong and Chong 2023; Leitner, Kratzer, and Blume 2022; Schafer 2008; Zenker et al. 2021; Hebert, LaBelle, and Vrhovec Sambolec 2010; Karagöz 2012; Klark Teknik Group 1999; LaBelle and Martinho 2011; LaBelle and Roden 2002; Licht 2019; Manaugh 2009; Sekou Cooke 2024; slim142 2013; tda 2004)
+
